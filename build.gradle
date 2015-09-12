@@ -1,0 +1,54 @@
+group 'com.mike'
+version '1.0.0'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+//todo war file creation functionality
+apply plugin: 'war'
+war {
+    baseName = 'myapp'
+    version =  '0.5.0'
+}
+configurations {
+    providedRuntime
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" } //todo war file creation functionality
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.spockframework:spock-core:1.0-groovy-2.4'
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") //todo war file creation functionality
+
+
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+}
+
+//bootRepackage {
+//    mainClass = 'com.mike.Application'
+//}
