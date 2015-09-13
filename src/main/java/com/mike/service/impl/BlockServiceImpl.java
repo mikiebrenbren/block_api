@@ -36,7 +36,7 @@ public class BlockServiceImpl implements BlockService {
     @Override
     public Blocks getBlocksByAttribute(String attributeKey, String attributeValue, int limit) {
 
-        Blocks blocks = jdbcRepository.getBlocksByColor(attributeKey, attributeValue, limit);
+        Blocks blocks = jdbcRepository.getBlocks(attributeKey, attributeValue, limit);
 
         if(blocks == null){
             return null; //todo handle this

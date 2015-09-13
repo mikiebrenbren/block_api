@@ -55,11 +55,7 @@ public class JdbcRepository {
         return block;
     }
 
-    public Blocks getBlocksByColor(String attributeKey,String attributeValue, int limit){
-        return getBlocks(attributeKey, attributeValue, limit);
-    }
-
-    private Blocks getBlocks(String attributeKey,String attributeValue, int limit){
+    public Blocks getBlocks(String attributeKey,String attributeValue, int limit){
 
         String sql = null;
         Blocks blocks = new Blocks();
@@ -75,10 +71,9 @@ public class JdbcRepository {
             case (Constants.SHAPE):
                 sql = limit>0?Queries.ALL_BY_SHAPE_LIMIT:Queries.ALL_BY_SHAPE;
         }
-
         p.put(attributeKey, attributeValue);
         if(limit > 0){
-            p.put("n", limit + "");
+            p.put("n", limit);
         }
 
         try{

@@ -34,41 +34,41 @@ public class Controller {
         if (validateBlock(block)){
             return new ResponseEntity<>(new ResponseModel(0, request), HttpStatus.BAD_REQUEST);
         }
+        //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(new ResponseModel(blockService.addBlock(block), request), HttpStatus.OK);
     }
 
     @RequestMapping("/id/{id}")
     public ResponseEntity<Block> getBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+            //TODO CREATE BETTER ERROR OUTPUT
             return new ResponseEntity<>(blockService.getBlockWithId(id), HttpStatus.OK);
     }
 
-    @RequestMapping("/color/{color}/limit/{limit}")
+    @RequestMapping("/blocks/color/{color}/limit/{limit}")
     public ResponseEntity<Blocks> getBlocksByColor(HttpServletRequest request, HttpServletResponse response, @PathVariable String color,@PathVariable int limit ){
         blocks = blockService.getBlocksByAttribute(Constants.COLOR, color, limit);
+        //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(blocks, HttpStatus.OK);
     }
 
-    @RequestMapping("/pattern/{pattern}/limit/{limit}")
+    @RequestMapping("/blocks/pattern/{pattern}/limit/{limit}")
     public ResponseEntity<Blocks> getBlocksByPattern(HttpServletRequest request, HttpServletResponse response, @PathVariable String pattern, @PathVariable int limit){
         blocks = blockService.getBlocksByAttribute(Constants.PATTERN, pattern, limit);
+        //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(blocks, HttpStatus.OK);
     }
 
-    @RequestMapping("/shape/{shape}/limit/{limit}")
+    @RequestMapping("/blocks/shape/{shape}/limit/{limit}")
     public ResponseEntity<Blocks> getBlocksByShape(HttpServletRequest request, HttpServletResponse response, @PathVariable String shape, @PathVariable int limit){
         blocks = blockService.getBlocksByAttribute(Constants.SHAPE, shape, limit);
+        //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(blocks, HttpStatus.OK);
     }
 
 
     /*
-    should be able to get all blocks of a certain shape, color, or pattern, should be able to get as many blocks as possible or limited as specified by the api user
     should be able to add a block to db TODO DONE
     should be able to delete a block from the db
-    should be able to get a single block
-    should be able to update a block via its id  TODO RESPONSE ERROR IF INVALID RESPONSE FROM DATABASE
-    should be able to find a block(s) with a certain pattern and shape, a certain pattern and color, and certain color and shape
-    make sure to validate requests varchar(45) when updating db
     error objects in spring http://springinpractice.com/2013/10/09/generating-json-error-object-responses-with-spring-web-mvc
      */
 
