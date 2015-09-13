@@ -1,7 +1,7 @@
 #Block API
 
 ###Summary:
-This is a spring boot app, with mysql as the database.  I have included the database named *conf_tech_dump* at the root level. If you choose to run
+This is a spring boot app, with mysql as the database.  I have included the database named *conf_tech_block* at the root level. If you choose to run
 this application locally clone the repository then navigate to the root level of the application.  Import the sql dump into your a local
 mysql instance.  Change the datasource parameters to your local values inside the application.properties file in the resources folder.
 
