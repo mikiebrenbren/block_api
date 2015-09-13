@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Michael Brennan on 9/8/15.
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/block")
 public class Controller {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -25,24 +25,38 @@ public class Controller {
     @Autowired
     BlockService blockService;
 
-    @RequestMapping(value = "block", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ResponseModel> createBlock(HttpServletRequest request, HttpServletResponse response, @RequestBody Block block){
-        logger.debug("Request to insert block");
+        logger.info("Request to insert block");
+        if (validateBlock(block)){
+            return new ResponseEntity<>(new ResponseModel(0, request), HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(new ResponseModel(blockService.addBlock(block), request), HttpStatus.OK);
+    }
+
+    @RequestMapping("/id/{id}")
+    public ResponseEntity<Block> getBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+            return new ResponseEntity<>(blockService.getBlockWithId(id), HttpStatus.OK);
     }
 
 
     /*
     should be able to get all blocks of a certain shape, color, or pattern
     should be able to get as many blocks as possible or limited as specified by the api user
-    should be able to add a block to db
+    should be able to add a block to db  todo DONE
     should be able to delete a block from the db
     should be able to get a single block
-    should be able to update a block via its id as well
+    should be able to update a block via its id
     should be able to find a block(s) with a certain pattern and shape, a certain pattern and color, and certain color and shape
-    make sure to validate requests varchar(45) and convert json to int
+    make sure to validate requests varchar(45) when updating db
+    error objects in spring http://springinpractice.com/2013/10/09/generating-json-error-object-responses-with-spring-web-mvc
      */
 
+    private boolean validateBlock(Block block){
+        return  block.getColor() == null || block.getColor().length() > 45 ||
+                block.getPattern() == null || block.getPattern().length() > 45 ||
+                block.getShape() == null || block.getPattern().length() > 45;
+    }
 
 
 

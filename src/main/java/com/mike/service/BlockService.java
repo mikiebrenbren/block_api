@@ -17,4 +17,8 @@ public class BlockService {
     public int addBlock(Block block){
         return jdbcRepository.createBlock(block);
     }
+
+    public Block getBlockWithId(int id){
+        return jdbcRepository.getBlockWithId(id);
+    }
 }
