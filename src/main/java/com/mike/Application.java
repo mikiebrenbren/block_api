@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application{
 //        extends SpringBootServletInitializer {
 //
-//    //todo this is for war file creation functionality not necessary if pure spring boot app
+//    //this is for war file creation functionality not necessary if pure spring boot app
 //    @Override
 //    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 //        return application.sources(Application.class);
