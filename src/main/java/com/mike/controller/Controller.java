@@ -76,10 +76,7 @@ public class Controller {
         //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(blocks, HttpStatus.OK);
     }
-    /*
-    need to be able to update
-    error objects in spring http://springinpractice.com/2013/10/09/generating-json-error-object-responses-with-spring-web-mvc
-     */
+
     //helper
     private boolean validateBlock(Block block){
         return  block.getColor() == null || block.getColor().length() > 45 ||
