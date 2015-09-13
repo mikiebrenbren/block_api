@@ -9,6 +9,12 @@ import com.mike.domain.model.Blocks;
 public interface BlockService {
 
     int addBlock(Block block);
-    Block getBlockWithId(int id);
+
+    Block getBlock(int id);
+
     Blocks getBlocksByAttribute(String attributeKey, String attributeValue, int limit);
+
+    int removeBlock(int id);
+
+    int updateBlock(int id, Block block);
 }
