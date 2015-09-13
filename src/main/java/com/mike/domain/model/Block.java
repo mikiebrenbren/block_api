@@ -1,4 +1,4 @@
-package com.mike.model;
+package com.mike.domain.model;
 
 import java.io.Serializable;
 
@@ -7,9 +7,18 @@ import java.io.Serializable;
  */
 public class Block implements Serializable {
 
+    private int id;
     private String color;
     private String shape;
     private String pattern;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getColor() {
         return color;
