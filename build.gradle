@@ -7,23 +7,21 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 //todo war file creation functionality
-apply plugin: 'war'
-war {
-    baseName = 'myapp'
-    version =  '0.5.0'
-}
-configurations {
-    providedRuntime
-}
+//apply plugin: 'war'
+//war {
+//    baseName = 'myapp'
+//    version =  '0.5.0'
+//}
+//configurations {
+//    providedRuntime
+//}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-snapshot" } //todo war file creation functionality
+//    maven { url "http://repo.spring.io/libs-snapshot" } //todo war file creation functionality
 }
 
 buildscript {
@@ -41,12 +39,15 @@ dependencies {
     compile 'org.spockframework:spock-core:1.0-groovy-2.4'
 
     compile("org.springframework.boot:spring-boot-starter-web")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") //todo war file creation functionality
-
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") //todo war file creation functionality
 
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.5.RELEASE'
+    compile 'org.hsqldb:hsqldb:2.3.1'
+    compile 'mysql:mysql-connector-java:5.1.36'
+
 }
 
 //bootRepackage {

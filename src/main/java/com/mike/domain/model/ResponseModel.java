@@ -1,4 +1,6 @@
-package com.mike.model;
+package com.mike.domain.model;
+
+import com.mike.util.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,14 +12,15 @@ public class ResponseModel {
     private String method;
     private String authType;
     private String requestUrl;
-    private String name;
+    private String successConfirmation;
 
-    public ResponseModel(String name, HttpServletRequest request){
+    public ResponseModel(int i,  HttpServletRequest request){
 
         this.method = request.getMethod();
         this.authType = request.getAuthType();
         this.requestUrl = request.getRequestURL().toString();
-        this.name = name;
+        successConfirmation = i == 1? Constants.SUCCESS : Constants.FAILURE;
+
     }
 
     public String getMethod() {
@@ -44,11 +47,11 @@ public class ResponseModel {
         this.requestUrl = requestUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getSuccessConfirmation() {
+        return successConfirmation;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSuccessConfirmation(String successConfirmation) {
+        this.successConfirmation = successConfirmation;
     }
 }
