@@ -1,24 +1,14 @@
 package com.mike.service;
 
 import com.mike.domain.model.Block;
-import com.mike.domain.repository.JdbcRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.mike.domain.model.Blocks;
 
 /**
- * Created by michaelbrennan on 9/12/15.
+ * Created by michaelbrennan on 9/13/15.
  */
-@Service
-public class BlockService {
+public interface BlockService {
 
-    @Autowired
-    JdbcRepository jdbcRepository;
-
-    public int addBlock(Block block){
-        return jdbcRepository.createBlock(block);
-    }
-
-    public Block getBlockWithId(int id){
-        return jdbcRepository.getBlockWithId(id);
-    }
+    int addBlock(Block block);
+    Block getBlockWithId(int id);
+    Blocks getBlocksByAttribute(String attributeKey, String attributeValue, int limit);
 }
