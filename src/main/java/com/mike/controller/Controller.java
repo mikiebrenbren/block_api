@@ -28,6 +28,24 @@ public class Controller {
     @Autowired
     BlockService blockService;
 
+    @RequestMapping("/id/{id}")
+    public ResponseEntity<Block> getBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+            //TODO CREATE BETTER ERROR OUTPUT
+            return new ResponseEntity<>(blockService.getBlock(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<ResponseModel> updateBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id, @RequestBody Block block){
+        //TODO CREATE BETTER ERROR OUTPUT
+        return new ResponseEntity<>(new ResponseModel(blockService.updateBlock(id, block), request), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<ResponseModel> deleteBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+        //TODO CREATE BETTER ERROR OUTPUT
+        return new ResponseEntity<>(new ResponseModel(blockService.removeBlock(id), request), HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ResponseModel> createBlock(HttpServletRequest request, HttpServletResponse response, @RequestBody Block block){
         logger.info("Request to insert block");
@@ -36,12 +54,6 @@ public class Controller {
         }
         //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(new ResponseModel(blockService.addBlock(block), request), HttpStatus.OK);
-    }
-
-    @RequestMapping("/id/{id}")
-    public ResponseEntity<Block> getBlock(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
-            //TODO CREATE BETTER ERROR OUTPUT
-            return new ResponseEntity<>(blockService.getBlockWithId(id), HttpStatus.OK);
     }
 
     @RequestMapping("/blocks/color/{color}/limit/{limit}")
@@ -64,14 +76,11 @@ public class Controller {
         //TODO CREATE BETTER ERROR OUTPUT
         return new ResponseEntity<>(blocks, HttpStatus.OK);
     }
-
-
     /*
-    should be able to add a block to db TODO DONE
-    should be able to delete a block from the db
+    need to be able to update
     error objects in spring http://springinpractice.com/2013/10/09/generating-json-error-object-responses-with-spring-web-mvc
      */
-
+    //helper
     private boolean validateBlock(Block block){
         return  block.getColor() == null || block.getColor().length() > 45 ||
                 block.getPattern() == null || block.getPattern().length() > 45 ||

@@ -18,12 +18,11 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     public int addBlock(Block block){
-
         return jdbcRepository.createBlock(block);
     }
 
     @Override
-    public Block getBlockWithId(int id){
+    public Block getBlock(int id){
 
         Block block = jdbcRepository.getBlockWithId(id);
 
@@ -43,4 +42,16 @@ public class BlockServiceImpl implements BlockService {
         }
         return blocks;
     }
+
+    @Override
+    public int removeBlock(int id) {
+        return jdbcRepository.removeBlock(id);
+    }
+
+    @Override
+    public int updateBlock(int id, Block block) {
+        return jdbcRepository.updateBlock(id, block);
+    }
+
+
 }

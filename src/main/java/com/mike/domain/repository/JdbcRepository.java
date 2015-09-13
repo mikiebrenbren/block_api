@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +37,7 @@ public class JdbcRepository {
         p.put("color", block.getColor());
         p.put("pattern", block.getPattern());
         p.put("shape", block.getShape());
-        return jdbcTemplate.update(Queries.INSERT_SQL, p);
+        return jdbcTemplate.update(Queries.INSERT_BLOCK, p);
     }
 
     public Block getBlockWithId(int id) {
@@ -63,18 +62,15 @@ public class JdbcRepository {
 
         switch(attributeKey){
             case(Constants.COLOR):
-                sql = limit>0?Queries.ALL_BY_COLOR_LIMIT:Queries.ALL_BY_COLOR;
+                sql = limit>0?initLimit(Queries.ALL_BY_COLOR_LIMIT, limit):Queries.ALL_BY_COLOR;
                 break;
             case (Constants.PATTERN):
-                sql = limit>0?Queries.ALL_BY_PATTERN_LIMIT:Queries.ALL_BY_PATTERN;
+                sql = limit>0?initLimit(initLimit(Queries.ALL_BY_PATTERN_LIMIT, limit), limit):Queries.ALL_BY_PATTERN;
                 break;
             case (Constants.SHAPE):
-                sql = limit>0?Queries.ALL_BY_SHAPE_LIMIT:Queries.ALL_BY_SHAPE;
+                sql = limit>0?initLimit(Queries.ALL_BY_SHAPE_LIMIT, limit):Queries.ALL_BY_SHAPE;
         }
         p.put(attributeKey, attributeValue);
-        if(limit > 0){
-            p.put("n", limit);
-        }
 
         try{
             blocks.setBlocks((jdbcTemplate.query(sql, p, new BlockExtractor())));
@@ -85,5 +81,26 @@ public class JdbcRepository {
         return blocks;
     }
 
+    public int removeBlock(int id){
 
+        p = new HashMap();
+        p.put("id", id);
+        return jdbcTemplate.update(Queries.DELETE_BLOCK, p);
+    }
+
+    public int updateBlock(int id, Block block){
+
+        p = new HashMap();
+        p.put("color", block.getColor());
+        p.put("pattern", block.getPattern());
+        p.put("shape", block.getShape());
+        p.put("id", id);
+        return jdbcTemplate.update(Queries.UPDATE_BLOCK, p);
+    }
+
+    //helper
+    private String initLimit(String sql, int limit){
+        p.put("n", limit);
+        return sql;
+    }
 }
