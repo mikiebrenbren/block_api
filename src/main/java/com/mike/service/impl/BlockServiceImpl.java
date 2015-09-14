@@ -27,7 +27,7 @@ public class BlockServiceImpl implements BlockService {
         Block block = jdbcRepository.getBlockWithId(id);
 
         if(block == null){
-            return null;  //todo handle this
+            return null;
         }
         return block;
     }
@@ -38,7 +38,7 @@ public class BlockServiceImpl implements BlockService {
         Blocks blocks = jdbcRepository.getBlocks(attributeKey, attributeValue, limit);
 
         if(blocks == null){
-            return null; //todo handle this
+            return null;
         }
         return blocks;
     }
