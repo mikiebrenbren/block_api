@@ -6,8 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Application
-        extends SpringBootServletInitializer {
+public class Application extends SpringBootServletInitializer {
 
     //this is for war file creation functionality not necessary if pure spring boot app
     @Override
