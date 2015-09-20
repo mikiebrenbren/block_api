@@ -10,10 +10,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'war'
 war {
     baseName = 'myapp'
-    version =  '0.5.0'
-}
-configurations {
-    providedRuntime
+    version =  '0.5.1'
 }
 
 sourceCompatibility = 1.8
@@ -21,6 +18,7 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
     maven { url "http://repo.spring.io/libs-snapshot" } //todo war file creation functionality
 }
 
@@ -33,22 +31,30 @@ buildscript {
     }
 }
 
+configurations {
+    providedRuntime
+}
+
 dependencies {
+    //GROOVY TEST FRAMEWORKS
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.spockframework:spock-core:1.0-groovy-2.4'
 
-    compile("org.springframework.boot:spring-boot-starter-web")
+    //SPRING BOOT
+    compile('org.springframework.boot:spring-boot-starter-web:1.2.6.RELEASE')
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") //todo war file creation functionality
-
     // tag::actuator[]
-    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.boot:spring-boot-starter-actuator:1.2.6.RELEASE')
     // end::actuator[]
+
+    //DATABASE
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.5.RELEASE'
     compile 'org.hsqldb:hsqldb:2.3.1'
     compile 'mysql:mysql-connector-java:5.1.36'
-    compile "org.apache.commons:commons-lang3:3.4"
 
+    //ASSORTED DEPENDENCIES
+    compile "org.apache.commons:commons-lang3:3.4"
 }
 
 //bootRepackage {

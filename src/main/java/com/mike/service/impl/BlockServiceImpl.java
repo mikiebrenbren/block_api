@@ -2,7 +2,8 @@ package com.mike.service.impl;
 
 import com.mike.domain.model.Block;
 import com.mike.domain.model.Blocks;
-import com.mike.domain.repository.JdbcRepository;
+import com.mike.domain.repository.JdbcRepositoryImpl;
+import com.mike.domain.repository.impl.JdbcRepository;
 import com.mike.service.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,17 @@ import org.springframework.stereotype.Service;
 public class BlockServiceImpl implements BlockService {
 
     @Autowired
-    JdbcRepository jdbcRepository;
+    JdbcRepository jdbcRepositoryImpl;
 
     @Override
     public int addBlock(Block block){
-        return jdbcRepository.createBlock(block);
+        return jdbcRepositoryImpl.createBlock(block);
     }
 
     @Override
     public Block getBlock(int id){
 
-        Block block = jdbcRepository.getBlockWithId(id);
+        Block block = jdbcRepositoryImpl.getBlockWithId(id);
 
         if(block == null){
             return null;
@@ -35,7 +36,7 @@ public class BlockServiceImpl implements BlockService {
     @Override
     public Blocks getBlocksByAttribute(String attributeKey, String attributeValue, int limit) {
 
-        Blocks blocks = jdbcRepository.getBlocks(attributeKey, attributeValue, limit);
+        Blocks blocks = jdbcRepositoryImpl.getBlocks(attributeKey, attributeValue, limit);
 
         if(blocks == null){
             return null;
@@ -45,12 +46,12 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     public int removeBlock(int id) {
-        return jdbcRepository.removeBlock(id);
+        return jdbcRepositoryImpl.removeBlock(id);
     }
 
     @Override
     public int updateBlock(int id, Block block) {
-        return jdbcRepository.updateBlock(id, block);
+        return jdbcRepositoryImpl.updateBlock(id, block);
     }
 
 
